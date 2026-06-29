@@ -52,6 +52,25 @@ npm run lint     oxlint
 3. **추상화는 3번 반복 후에**: 공통 컴포넌트, 커스텀 훅, 디자인 토큰, 추상 레이어를 미리 만들지 않는다. 같은 패턴이 3곳 이상 나타난 이후 추출.
 4. **백엔드/인증/사이드 기능 제안 금지**: 모든 그런 제안은 "MVP 이후"로 미룬다.
 
+## 상태 관리
+
+- 로컬 UI 상태: `useState`.
+- DB에서 파생되는 상태: `useLiveQuery` (Dexie). DB 변경 시 자동 리렌더.
+- **전역 상태 도입 금지**: Context, Redux, Zustand, Jotai 등 추가하지 않는다. MVP 범위에서 전역 상태가 필요한 시나리오가 없다.
+
+## Tailwind 사용 규칙
+
+- JSX에 인라인 클래스만 사용한다.
+- `@apply`로 컴포넌트 스타일 추출, 별도 CSS 클래스 정의 금지. (작업 원칙 #3에 따름.)
+- 커스텀 색/간격이 필요하면 Tailwind의 임의 값 문법(`bg-[#abc]`, `w-[42px]`)을 먼저 시도하고, 같은 값이 3곳 이상 쓰일 때만 `tailwind.config`에 추가.
+
+## 배포 / 호스팅 노트
+
+- 정적 호스트(Cloudflare Pages, Vercel)에서 SPA로 동작하려면 `/deck/123` 같은 클라이언트 라우트가 404 나지 않도록 fallback 필요.
+  - Cloudflare Pages: `public/_redirects`에 `/* /index.html 200`
+  - Vercel: `vercel.json`에 rewrites 설정
+- 배포 시점에 추가한다. 지금 미리 설정하지 말 것.
+
 ## MVP 범위 밖 (보류)
 
 명시적으로 1주 MVP에서 제외:
