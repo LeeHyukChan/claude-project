@@ -64,12 +64,13 @@ npm run lint     oxlint
 - `@apply`로 컴포넌트 스타일 추출, 별도 CSS 클래스 정의 금지. (작업 원칙 #3에 따름.)
 - 커스텀 색/간격이 필요하면 Tailwind의 임의 값 문법(`bg-[#abc]`, `w-[42px]`)을 먼저 시도하고, 같은 값이 3곳 이상 쓰일 때만 `tailwind.config`에 추가.
 
-## 배포 / 호스팅 노트
+## 배포 / 호스팅
 
-- 정적 호스트(Cloudflare Pages, Vercel)에서 SPA로 동작하려면 `/deck/123` 같은 클라이언트 라우트가 404 나지 않도록 fallback 필요.
-  - Cloudflare Pages: `public/_redirects`에 `/* /index.html 200`
-  - Vercel: `vercel.json`에 rewrites 설정
-- 배포 시점에 추가한다. 지금 미리 설정하지 말 것.
+- 호스트: **Firebase Hosting**.
+- 빌드 산출물: `dist/` (Vite 기본).
+- SPA fallback: `firebase.json`의 `hosting.rewrites`에 `{ "source": "**", "destination": "/index.html" }` 필요. (`firebase init hosting`이 SPA 모드 선택 시 자동 설정.)
+- 로컬 배포 명령: `npm run build && firebase deploy --only hosting`.
+- 무료 티어 대역폭 한도: **360MB/일 (~10GB/월)**. 자산 크기 증가에 민감하게 굴 것 (이미지/폰트 무겁게 넣지 말기).
 
 ## MVP 범위 밖 (보류)
 
