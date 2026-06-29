@@ -66,11 +66,11 @@ npm run lint     oxlint
 
 ## 배포 / 호스팅
 
-- 호스트: **Firebase Hosting**.
-- 빌드 산출물: `dist/` (Vite 기본).
-- SPA fallback: `firebase.json`의 `hosting.rewrites`에 `{ "source": "**", "destination": "/index.html" }` 필요. (`firebase init hosting`이 SPA 모드 선택 시 자동 설정.)
-- 로컬 배포 명령: `npm run build && firebase deploy --only hosting`.
-- 무료 티어 대역폭 한도: **360MB/일 (~10GB/월)**. 자산 크기 증가에 민감하게 굴 것 (이미지/폰트 무겁게 넣지 말기).
+- 호스트: **Cloudflare Workers Static Assets** (구 Pages와 통합된 새 흐름).
+- 설정 파일: 루트의 `wrangler.jsonc`. `assets.directory = "./dist"`, `assets.not_found_handling = "single-page-application"`로 SPA fallback 자동 처리.
+- GitHub `main` 푸시 시 Cloudflare가 자동 빌드/재배포.
+- **`public/_redirects` 사용 금지**: Workers Static Assets 검증기가 `/* /index.html 200`을 무한루프로 거부한다. SPA fallback은 `wrangler.jsonc`로만.
+- 무료 티어 대역폭: **무제한**.
 
 ## MVP 범위 밖 (보류)
 
