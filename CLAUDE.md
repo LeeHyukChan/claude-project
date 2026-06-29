@@ -67,10 +67,16 @@ npm run lint     oxlint
 ## 배포 / 호스팅
 
 - 호스트: **Cloudflare Workers Static Assets** (구 Pages와 통합된 새 흐름).
+- **라이브 URL**: https://claude-project.hyeoukchan98.workers.dev/
 - 설정 파일: 루트의 `wrangler.jsonc`. `assets.directory = "./dist"`, `assets.not_found_handling = "single-page-application"`로 SPA fallback 자동 처리.
 - GitHub `main` 푸시 시 Cloudflare가 자동 빌드/재배포.
 - **`public/_redirects` 사용 금지**: Workers Static Assets 검증기가 `/* /index.html 200`을 무한루프로 거부한다. SPA fallback은 `wrangler.jsonc`로만.
 - 무료 티어 대역폭: **무제한**.
+
+## 진행 현황
+
+- 2026-06-29: Phase 1 완료. 데이터 모델 + SM-2 + 3페이지 라우팅 + Cloudflare 배포 성공.
+- 다음: 라이브 URL에서 실사용 후 결정 (UX 다듬기 / 카드 편집 / CSV import / PWA 중 선택).
 
 ## MVP 범위 밖 (보류)
 
